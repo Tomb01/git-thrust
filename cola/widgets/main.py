@@ -615,6 +615,7 @@ class MainView(standard.MainWindow):
         self.setMenuBar(self.menubar)
 
         # File Menu
+        # THRUST: File menu element is only disabled with comment is case of future changes
         add_menu = qtutils.add_menu
         self.file_menu = add_menu(N_('&File'), self.menubar)
         self.file_menu.addAction(self.quick_repository_search)
@@ -622,23 +623,28 @@ class MainView(standard.MainWindow):
         self.open_recent_menu = self.file_menu.addMenu(N_('Open Recent'))
         self.open_recent_menu.setIcon(icons.folder())
         self.file_menu.addAction(self.open_repo_action)
-        self.file_menu.addAction(self.open_repo_new_action)
+        
+        # Open in new window is not allowed for security reason
+        #self.file_menu.addAction(self.open_repo_new_action)
         self.file_menu.addSeparator()
-        self.file_menu.addAction(self.new_repository_action)
-        self.file_menu.addAction(self.new_bare_repository_action)
+        
+        # User cannot create new repository. Only cloning
+        #self.file_menu.addAction(self.new_repository_action)
+        #self.file_menu.addAction(self.new_bare_repository_action)
         self.file_menu.addAction(self.clone_repo_action)
         self.file_menu.addSeparator()
         self.file_menu.addAction(self.rescan_action)
         self.file_menu.addAction(self.find_files_action)
-        self.file_menu.addAction(self.edit_remotes_action)
+        #self.file_menu.addAction(self.edit_remotes_action)
         self.file_menu.addAction(self.browse_recently_modified_action)
-        self.file_menu.addSeparator()
-        self.file_menu.addAction(self.apply_patches_action)
-        self.file_menu.addAction(self.export_patches_action)
-        self.file_menu.addAction(self.save_tarball_action)
+        #self.file_menu.addSeparator()
+        #self.file_menu.addAction(self.apply_patches_action)
+        #self.file_menu.addAction(self.export_patches_action)
+        #self.file_menu.addAction(self.save_tarball_action)
 
+        # Git LFS and annex control is disabled
         # Git Annex / Git LFS
-        annex = core.find_executable('git-annex')
+        '''annex = core.find_executable('git-annex')
         lfs = core.find_executable('git-lfs')
         if annex or lfs:
             self.file_menu.addSeparator()
@@ -649,10 +655,11 @@ class MainView(standard.MainWindow):
 
         self.file_menu.addSeparator()
         self.file_menu.addAction(self.preferences_action)
-        self.file_menu.addAction(self.quit_action)
+        self.file_menu.addAction(self.quit_action)'''
 
         # Edit Menu
-        self.edit_proxy = edit_proxy = FocusProxy(
+        # THRUST: disabled
+        '''self.edit_proxy = edit_proxy = FocusProxy(
             editor, editor.summary, editor.description
         )
 
@@ -688,15 +695,18 @@ class MainView(standard.MainWindow):
         )
         select_all.setIcon(icons.select_all())
         edit_menu.addSeparator()
-        commitmsg.add_menu_actions(edit_menu, self.commiteditor.menu_actions)
+        commitmsg.add_menu_actions(edit_menu, self.commiteditor.menu_actions)'''
 
         # Actions menu
+        # THRUST: Only fetch, pull and push are allowed.
+        # Merge is only managed by team leader 
         self.actions_menu = add_menu(N_('Actions'), self.menubar)
         self.actions_menu.addAction(self.fetch_action)
         self.actions_menu.addAction(self.push_action)
         self.actions_menu.addAction(self.pull_action)
         self.actions_menu.addAction(self.stash_action)
-        self.actions_menu.addSeparator()
+        
+        '''self.actions_menu.addSeparator()
         self.actions_menu.addAction(self.create_tag_action)
         self.actions_menu.addAction(self.cherry_pick_action)
         self.actions_menu.addAction(self.cherry_pick_abort_action)
@@ -707,13 +717,13 @@ class MainView(standard.MainWindow):
         self.actions_menu.addAction(self.add_submodule_action)
         self.actions_menu.addSeparator()
         self.actions_menu.addAction(self.grep_action)
-        self.actions_menu.addAction(self.search_commits_action)
+        self.actions_menu.addAction(self.search_commits_action)'''
 
         # Commit Menu
         self.commit_menu = add_menu(N_('Commit@@verb'), self.menubar)
         self.commit_menu.setTitle(N_('Commit@@verb'))
         self.commit_menu.addAction(self.commiteditor.commit_action)
-        self.commit_menu.addAction(self.commit_amend_action)
+        #self.commit_menu.addAction(self.commit_amend_action)
         self.commit_menu.addAction(self.undo_commit_action)
         self.commit_menu.addSeparator()
         self.commit_menu.addAction(self.statuswidget.tree.process_selection_action)
@@ -723,20 +733,22 @@ class MainView(standard.MainWindow):
         self.commit_menu.addSeparator()
         self.commit_menu.addAction(self.unstage_all_action)
         self.commit_menu.addAction(self.unstage_selected_action)
-        self.commit_menu.addSeparator()
+        '''self.commit_menu.addSeparator()
         self.commit_menu.addAction(self.load_commitmsg_action)
         self.commit_menu.addAction(self.load_commitmsg_template_action)
-        self.commit_menu.addAction(self.prepare_commitmsg_hook_action)
+        self.commit_menu.addAction(self.prepare_commitmsg_hook_action)'''
 
         # Diff Menu
-        self.diff_menu = add_menu(N_('Diff'), self.menubar)
+        # THRUST: diff menu disabled
+        '''self.diff_menu = add_menu(N_('Diff'), self.menubar)
         self.diff_menu.addAction(self.diff_expression_action)
         self.diff_menu.addAction(self.branch_compare_action)
         self.diff_menu.addSeparator()
-        self.diff_menu.addAction(self.show_diffstat_action)
+        self.diff_menu.addAction(self.show_diffstat_action)'''
 
         # Branch Menu
-        self.branch_menu = add_menu(N_('Branch'), self.menubar)
+        # THRUST: Branch is managed by custom Task menu
+        '''self.branch_menu = add_menu(N_('Branch'), self.menubar)
         self.branch_menu.addAction(self.branch_review_action)
         self.branch_menu.addSeparator()
         self.branch_menu.addAction(self.create_branch_action)
@@ -749,20 +761,22 @@ class MainView(standard.MainWindow):
         self.branch_menu.addAction(self.browse_other_branch_action)
         self.branch_menu.addSeparator()
         self.branch_menu.addAction(self.visualize_current_action)
-        self.branch_menu.addAction(self.visualize_all_action)
+        self.branch_menu.addAction(self.visualize_all_action)'''
 
         # Rebase menu
-        self.rebase_menu = add_menu(N_('Rebase'), self.menubar)
+        # THRUST: Rebase is not allowed
+        '''self.rebase_menu = add_menu(N_('Rebase'), self.menubar)
         self.rebase_menu.addAction(self.rebase_start_action)
         self.rebase_menu.addAction(self.rebase_edit_todo_action)
         self.rebase_menu.addSeparator()
         self.rebase_menu.addAction(self.rebase_continue_action)
         self.rebase_menu.addAction(self.rebase_skip_action)
         self.rebase_menu.addSeparator()
-        self.rebase_menu.addAction(self.rebase_abort_action)
+        self.rebase_menu.addAction(self.rebase_abort_action)'''
 
         # Reset menu
-        self.reset_menu = add_menu(N_('Reset'), self.menubar)
+        # THRUST: Reset is not allowed
+        '''self.reset_menu = add_menu(N_('Reset'), self.menubar)
         self.reset_menu.addAction(self.unstage_all_action)
         self.reset_menu.addAction(self.undo_commit_action)
         self.reset_menu.addSeparator()
@@ -772,7 +786,7 @@ class MainView(standard.MainWindow):
         self.reset_menu.addSeparator()
         self.reset_menu.addAction(self.reset_keep_action)
         self.reset_menu.addAction(self.reset_merge_action)
-        self.reset_menu.addAction(self.reset_hard_action)
+        self.reset_menu.addAction(self.reset_hard_action)'''
 
         # View Menu
         self.view_menu = add_menu(N_('View'), self.menubar)
@@ -786,8 +800,8 @@ class MainView(standard.MainWindow):
 
         # Help Menu
         self.help_menu = add_menu(N_('Help'), self.menubar)
-        self.help_menu.addAction(self.help_docs_action)
-        self.help_menu.addAction(self.help_shortcuts_action)
+        #self.help_menu.addAction(self.help_docs_action)
+        #self.help_menu.addAction(self.help_shortcuts_action)
         self.help_menu.addAction(self.help_about_action)
 
         # Arrange dock widgets
