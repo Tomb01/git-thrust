@@ -86,7 +86,7 @@ class StatusWidget(QtWidgets.QFrame):
 
     def set_initial_size(self):
         self.setMaximumWidth(222)
-        QtCore.QTimer.singleShot(1, lambda: self.setMaximumWidth(2 ** 13))
+        QtCore.QTimer.singleShot(1, lambda: self.setMaximumWidth(2**13))
 
     def refresh(self):
         self.tree.show_selection()
@@ -390,7 +390,7 @@ class StatusTreeWidget(QtWidgets.QTreeWidget):
         did_reselect = False
 
         with qtutils.BlockSignals(self):
-            for (new, old, sel, reselect) in saved_selection:
+            for new, old, sel, reselect in saved_selection:
                 for item in sel:
                     if item in new:
                         reselect(item, current=False)
@@ -407,7 +407,7 @@ class StatusTreeWidget(QtWidgets.QTreeWidget):
         #
         # The following block of code implements the behavior of selecting
         # the next item based on the previous selection.
-        for (new, old, sel, reselect) in saved_selection:
+        for new, old, sel, reselect in saved_selection:
             # When modified is staged, select the next modified item
             # When unmerged is staged, select the next unmerged item
             # When unstaging, select the next staged item
@@ -422,7 +422,7 @@ class StatusTreeWidget(QtWidgets.QTreeWidget):
                 # The item no longer exists in this list so search for
                 # its nearest neighbors and select them instead.
                 idx = old.index(item)
-                for j in itertools.chain(old[idx + 1:], reversed(old[:idx])):
+                for j in itertools.chain(old[idx + 1 :], reversed(old[:idx])):
                     if j in new:
                         reselect(j, current=True)
                         return
@@ -720,7 +720,7 @@ class StatusTreeWidget(QtWidgets.QTreeWidget):
         # Copy the leading path when the action is activated.
         qtutils.connect_action(
             copy_leading_path_action,
-            lambda widget=widget: copy_leading_path(context, widget.value())
+            lambda widget=widget: copy_leading_path(context, widget.value()),
         )
 
         menu.addSeparator()
@@ -1597,7 +1597,7 @@ class CopyLeadingPathWidget(QtWidgets.QWidget):
             self.icon,
             self.label,
             qtutils.STRETCH,
-            self.spinbox
+            self.spinbox,
         )
         self.setLayout(layout)
 
@@ -1618,7 +1618,9 @@ class CopyLeadingPathWidget(QtWidgets.QWidget):
 
             color = palette.highlightedText().color()
             highlight_text_rgb = 'rgb(%s, %s, %s)' % (
-                color.red(), color.green(), color.blue()
+                color.red(),
+                color.green(),
+                color.blue(),
             )
 
         if theme.disabled_text_color:
@@ -1648,7 +1650,7 @@ class CopyLeadingPathWidget(QtWidgets.QWidget):
             disabled_text_rgb=disabled_text_rgb,
             text_rgb=text_rgb,
             highlight_text_rgb=highlight_text_rgb,
-            highlight_rgb=highlight_rgb
+            highlight_rgb=highlight_rgb,
         )
 
         self.setStyleSheet(stylesheet)

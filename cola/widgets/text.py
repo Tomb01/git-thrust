@@ -24,7 +24,6 @@ def get_stripped(widget):
 
 
 class LineEdit(QtWidgets.QLineEdit):
-
     cursor_changed = Signal(int, int)
 
     def __init__(self, parent=None, row=1, get_value=None, clear_button=False):
@@ -234,7 +233,6 @@ class PlainTextEditExtension(BaseTextEditExtension):
 
 
 class PlainTextEdit(QtWidgets.QPlainTextEdit):
-
     cursor_changed = Signal(int, int)
     leave = Signal()
 
@@ -305,8 +303,7 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
             action = menu.addAction(N_('Open "%s"') % url)
             action.setIcon(icons.external())
             qtutils.connect_action(
-                action,
-                partial(QtGui.QDesktopServices.openUrl, QtCore.QUrl(url))
+                action, partial(QtGui.QDesktopServices.openUrl, QtCore.QUrl(url))
             )
         menu.exec_(self.mapToGlobal(point))
 
@@ -319,8 +316,9 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
             line = self.selected_line()
         if not line:
             return []
-        return [word for word in line.split()
-                if word.startswith(('http://', 'https://'))]
+        return [
+            word for word in line.split() if word.startswith(('http://', 'https://'))
+        ]
 
 
 class TextEditExtension(BaseTextEditExtension):
@@ -340,7 +338,6 @@ class TextEditExtension(BaseTextEditExtension):
 
 
 class TextEdit(QtWidgets.QTextEdit):
-
     cursor_changed = Signal(int, int)
     leave = Signal()
 

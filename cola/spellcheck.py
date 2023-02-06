@@ -106,7 +106,7 @@ class NorvigSpellCheck(object):
         if cfg_dictionary and os.path.exists(cfg_dictionary):
             paths.append((cfg_dictionary, False))
 
-        for (path, title) in paths:
+        for path, title in paths:
             try:
                 with open(path, 'r') as f:
                     for word in f:

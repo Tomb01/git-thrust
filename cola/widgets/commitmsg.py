@@ -233,7 +233,7 @@ class CommitMessageEditor(QtWidgets.QFrame):
         QtCore.QTimer.singleShot(1, self.restore_size)
 
     def restore_size(self):
-        self.setMaximumHeight(2 ** 13)
+        self.setMaximumHeight(2**13)
 
     def focus_summary(self):
         self.summary.setFocus()
@@ -585,7 +585,6 @@ class MessageValidator(QtGui.QValidator):
 
 
 class CommitSummaryLineEdit(HintedLineEdit):
-
     cursor = Signal(int, int)
 
     def __init__(self, context, parent=None):

@@ -87,7 +87,6 @@ class Interaction(object):
         default=True,
         cancel_text=None,
     ):
-
         cancel_text = cancel_text or 'Cancel'
         icon = icon or '?'
 

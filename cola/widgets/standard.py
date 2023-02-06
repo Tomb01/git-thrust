@@ -346,7 +346,6 @@ class TreeMixin(object):
 
         # Process non-root entries with valid parents only.
         elif key == Qt.Key_Left and index.parent().isValid():
-
             # File entries have rowCount() == 0
             model = widget.model()
             if (
@@ -786,7 +785,6 @@ class MessageBox(Dialog):
         cancel_text=None,
         cancel_icon=None,
     ):
-
         Dialog.__init__(self, parent=parent)
 
         if parent:

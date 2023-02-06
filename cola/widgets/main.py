@@ -623,24 +623,24 @@ class MainView(standard.MainWindow):
         self.open_recent_menu = self.file_menu.addMenu(N_('Open Recent'))
         self.open_recent_menu.setIcon(icons.folder())
         self.file_menu.addAction(self.open_repo_action)
-        
+
         # Open in new window is not allowed for security reason
-        #self.file_menu.addAction(self.open_repo_new_action)
+        # self.file_menu.addAction(self.open_repo_new_action)
         self.file_menu.addSeparator()
-        
+
         # User cannot create new repository. Only cloning
-        #self.file_menu.addAction(self.new_repository_action)
-        #self.file_menu.addAction(self.new_bare_repository_action)
+        # self.file_menu.addAction(self.new_repository_action)
+        # self.file_menu.addAction(self.new_bare_repository_action)
         self.file_menu.addAction(self.clone_repo_action)
         self.file_menu.addSeparator()
         self.file_menu.addAction(self.rescan_action)
         self.file_menu.addAction(self.find_files_action)
-        #self.file_menu.addAction(self.edit_remotes_action)
+        # self.file_menu.addAction(self.edit_remotes_action)
         self.file_menu.addAction(self.browse_recently_modified_action)
-        #self.file_menu.addSeparator()
-        #self.file_menu.addAction(self.apply_patches_action)
-        #self.file_menu.addAction(self.export_patches_action)
-        #self.file_menu.addAction(self.save_tarball_action)
+        # self.file_menu.addSeparator()
+        # self.file_menu.addAction(self.apply_patches_action)
+        # self.file_menu.addAction(self.export_patches_action)
+        # self.file_menu.addAction(self.save_tarball_action)
 
         # Git LFS and annex control is disabled
         # Git Annex / Git LFS
@@ -699,13 +699,13 @@ class MainView(standard.MainWindow):
 
         # Actions menu
         # THRUST: Only fetch, pull and push are allowed.
-        # Merge is only managed by team leader 
+        # Merge is only managed by team leader
         self.actions_menu = add_menu(N_('Actions'), self.menubar)
         self.actions_menu.addAction(self.fetch_action)
         self.actions_menu.addAction(self.push_action)
         self.actions_menu.addAction(self.pull_action)
         self.actions_menu.addAction(self.stash_action)
-        
+
         '''self.actions_menu.addSeparator()
         self.actions_menu.addAction(self.create_tag_action)
         self.actions_menu.addAction(self.cherry_pick_action)
@@ -723,7 +723,7 @@ class MainView(standard.MainWindow):
         self.commit_menu = add_menu(N_('Commit@@verb'), self.menubar)
         self.commit_menu.setTitle(N_('Commit@@verb'))
         self.commit_menu.addAction(self.commiteditor.commit_action)
-        #self.commit_menu.addAction(self.commit_amend_action)
+        # self.commit_menu.addAction(self.commit_amend_action)
         self.commit_menu.addAction(self.undo_commit_action)
         self.commit_menu.addSeparator()
         self.commit_menu.addAction(self.statuswidget.tree.process_selection_action)
@@ -800,8 +800,8 @@ class MainView(standard.MainWindow):
 
         # Help Menu
         self.help_menu = add_menu(N_('Help'), self.menubar)
-        #self.help_menu.addAction(self.help_docs_action)
-        #self.help_menu.addAction(self.help_shortcuts_action)
+        # self.help_menu.addAction(self.help_docs_action)
+        # self.help_menu.addAction(self.help_shortcuts_action)
         self.help_menu.addAction(self.help_about_action)
 
         # Arrange dock widgets
@@ -1319,7 +1319,7 @@ def _install_config_actions(context, menu, names_and_shortcuts):
         return
     menu.addSeparator()
     cache = {}
-    for (name, shortcut) in names_and_shortcuts:
+    for name, shortcut in names_and_shortcuts:
         sub_menu, action_name = build_menus(name, menu, cache)
         callback = cmds.run(cmds.RunConfigAction, context, name)
         menu_action = sub_menu.addAction(action_name, callback)

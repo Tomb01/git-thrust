@@ -399,7 +399,6 @@ class CommitTreeWidgetItem(QtWidgets.QTreeWidgetItem):
 
 # pylint: disable=too-many-ancestors
 class CommitTreeWidget(standard.TreeWidget, ViewerMixin):
-
     commits_selected = Signal(object)
     diff_commits = Signal(object, object)
     zoom_to_fit = Signal()
@@ -977,7 +976,6 @@ class ReaderThread(QtCore.QThread):
 
 
 class Cache(object):
-
     _label_font = None
 
     @classmethod
@@ -993,7 +991,6 @@ class Edge(QtWidgets.QGraphicsItem):
     item_type = qtutils.standard_item_type_value(1)
 
     def __init__(self, source, dest):
-
         QtWidgets.QGraphicsItem.__init__(self)
 
         self.setAcceptedMouseButtons(Qt.NoButton)
@@ -1181,7 +1178,6 @@ class Commit(QtWidgets.QGraphicsItem):
         cached_commit_color=commit_color,
         cached_merge_color=merge_color,
     ):
-
         QtWidgets.QGraphicsItem.__init__(self)
 
         self.commit = commit
@@ -1238,7 +1234,6 @@ class Commit(QtWidgets.QGraphicsItem):
         return self.item_shape
 
     def paint(self, painter, option, _widget):
-
         # Do not draw outside the exposed rect
         painter.setClipRect(option.exposedRect)
 
@@ -1266,7 +1261,6 @@ class Commit(QtWidgets.QGraphicsItem):
 
 
 class Label(QtWidgets.QGraphicsItem):
-
     item_type = qtutils.graphics_item_type_value(3)
 
     head_color = QtGui.QColor(Qt.green)
@@ -1376,7 +1370,6 @@ class Label(QtWidgets.QGraphicsItem):
 
 # pylint: disable=too-many-ancestors
 class GraphView(QtWidgets.QGraphicsView, ViewerMixin):
-
     commits_selected = Signal(object)
     diff_commits = Signal(object, object)
 
